@@ -1,0 +1,134 @@
+    :root{
+      --bg: #0a0a0a;           /* black */
+      --bg-2:#111;             /* panels */
+      --bg-3:#1a1a1a;          /* inputs */
+      --text:#f6f6f6;          /* white */
+      --muted:#bdbdbd;         /* gray */
+      --muted-2:#888;          
+      --border:#2a2a2a;        
+      --ok:#f6f6f6;            /* use luminance only */
+      --shadow: 0 10px 30px rgba(0,0,0,.6);
+      --radius: 18px;
+      --transition: 200ms cubic-bezier(.2,.8,.2,1);
+    }
+    .light{
+      --bg:#ffffff;
+      --bg-2:#f5f5f5;
+      --bg-3:#eeeeee;
+      --text:#0a0a0a;
+      --muted:#444;
+      --muted-2:#666;
+      --border:#e6e6e6;
+      --ok:#0a0a0a;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: radial-gradient(1200px 1200px at 10% -20%,rgba(255,255,255,.05),transparent 60%),
+                  radial-gradient(1200px 1200px at 110% 120%,rgba(255,255,255,.04),transparent 60%),
+                  var(--bg);
+      color:var(--text); line-height:1.4; letter-spacing:.2px;
+      transition: background-color var(--transition), color var(--transition);
+    }
+
+    /* subtle animated grid background */
+    .grid-bg{
+      position:fixed; inset:0; pointer-events:none; opacity:.06; mix-blend-mode:overlay;
+      background-image: linear-gradient(to right, currentColor 1px, transparent 1px),
+                        linear-gradient(to bottom, currentColor 1px, transparent 1px);
+      background-size: 40px 40px; color:#fff; animation: pan 20s linear infinite;
+    }
+    @keyframes pan{ from{background-position:0 0, 0 0} to{background-position: 40px 40px, 40px 40px} }
+
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:28px 24px 14px; position:sticky; top:0; backdrop-filter:saturate(120%) blur(6px);
+      background:linear-gradient(to bottom, color-mix(in oklab, var(--bg) 92%, transparent), transparent);
+      z-index: 10; border-bottom:1px solid var(--border);
+    }
+    .title{
+      display:flex; align-items:center; gap:14px; font-weight:800; letter-spacing:.4px; font-size:clamp(20px,2vw,28px);
+    }
+    .title svg{width:30px; height:30px; filter: drop-shadow(0 8px 14px rgba(0,0,0,.25));}
+
+    .actions{display:flex; gap:8px; align-items:center}
+    .toggle{
+      display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border); padding:6px 10px; border-radius:999px; cursor:pointer;
+      background:var(--bg-2); box-shadow: var(--shadow);
+    }
+    .toggle input{appearance:none; width:42px; height:26px; background:var(--bg-3); border:1px solid var(--border); border-radius:999px; position:relative; outline:none; transition: all var(--transition)}
+    .toggle input:before{content:""; position:absolute; inset:3px; width:20px; height:20px; border-radius:50%; background:var(--text); transform: translateX(0); transition: transform var(--transition)}
+    .toggle input:checked:before{ transform: translateX(16px) }
+
+    main{ max-width:1100px; margin: 12px auto 80px; padding: 0 20px; }
+
+    .composer{ display:grid; grid-template-columns: 1.2fr .9fr .6fr .6fr auto; gap:12px; background:var(--bg-2); padding:16px; border-radius: var(--radius); border:1px solid var(--border); box-shadow: var(--shadow); }
+    .composer input[type="text"], .composer input[type="date"], .composer select{ width:100%; padding:12px 12px; border-radius:12px; background:var(--bg-3); border:1px solid var(--border); color:var(--text); outline:none; transition: border-color var(--transition), transform var(--transition); }
+    .composer input::placeholder{ color:var(--muted-2) }
+    .composer input:focus, .composer select:focus{ border-color: color-mix(in oklab, var(--text) 15%, var(--border)); transform: translateY(-1px); }
+
+    .btn{
+      border:1px solid var(--border); background:var(--text); color:var(--bg); padding:12px 14px; border-radius:12px; font-weight:700; cursor:pointer; transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+    }
+    .btn:hover{ transform: translateY(-1px) scale(1.01) }
+    .btn:active{ transform: translateY(0) scale(.99) }
+
+    .toolbar{ display:flex; gap:12px; align-items:center; margin:18px 2px; flex-wrap:wrap }
+    .tool{ display:flex; gap:8px; align-items:center; background:var(--bg-2); border:1px solid var(--border); padding:10px 12px; border-radius:12px }
+    .tool input, .tool select{ background:transparent; border:none; outline:none; color:var(--text) }
+    .tool input::placeholder{ color:var(--muted-2) }
+
+    .board{
+      display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:14px; align-items:start;
+    }
+
+    .card{ position:relative; display:grid; gap:10px; background:var(--bg-2); border:1px solid var(--border); border-radius:16px; padding:14px; box-shadow: var(--shadow); transform-origin: 50% 0; transition: transform .35s cubic-bezier(.2,.8,.2,1), background-color var(--transition), border-color var(--transition), opacity var(--transition) }
+    .card.enter{ animation: pop-in .35s cubic-bezier(.2,.8,.2,1) }
+    @keyframes pop-in{ from{ transform: translateY(10px) scale(.97); opacity:0 } to{ transform: none; opacity:1 } }
+
+    .row{ display:flex; gap:10px; align-items:center; justify-content:space-between }
+    .left{ display:flex; gap:10px; align-items:flex-start }
+
+    .checkbox{ appearance:none; width:22px; height:22px; border-radius:8px; background:var(--bg-3); border:1px solid var(--border); display:grid; place-items:center; cursor:pointer; transition: all var(--transition) }
+    .checkbox:checked{ background:var(--text) }
+    .checkbox:checked::after{ content:"\2713"; color:var(--bg); font-weight:900; transform: translateY(-1px) }
+
+    .titleline{ display:flex; flex-direction:column; gap:4px; flex:1 }
+    .task-title{ font-weight:700; letter-spacing:.2px; }
+    .task-title.completed{ text-decoration:line-through; color:var(--muted) }
+    .meta{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; color:var(--muted); font-size:12px }
+
+    .chip{ border:1px solid var(--border); background:var(--bg-3); color:var(--text); padding:6px 8px; border-radius:999px; font-size:12px }
+    .chip.badge{ background: transparent; }
+
+    .tags{ display:flex; gap:6px; flex-wrap:wrap }
+
+    .card .controls{ display:flex; gap:8px }
+    .icon-btn{ border:1px solid var(--border); background:var(--bg-3); color:var(--text); border-radius:10px; padding:8px 10px; cursor:pointer; transition: transform var(--transition), opacity var(--transition) }
+    .icon-btn:hover{ transform: translateY(-1px) }
+
+    .hidden{ display:none !important }
+
+    .empty{ border:1px dashed var(--border); border-radius:16px; padding:24px; display:grid; place-items:center; color:var(--muted); background:var(--bg-2) }
+
+    /* Dialog */
+    dialog{ border:none; border-radius: 16px; padding:0; background:var(--bg-2); color:var(--text); box-shadow: var(--shadow); width:min(520px, 92vw) }
+    dialog[open]{ animation: pop-in .3s ease }
+    .dialog-header{ display:flex; align-items:center; justify-content:space-between; padding:16px; border-bottom:1px solid var(--border) }
+    .dialog-body{ padding:16px; display:grid; gap:12px }
+
+    /* Tiny donut graph */
+    .stats{ display:flex; gap:14px; align-items:center; margin: 10px 0 0 }
+    .donut{ width:56px; height:56px }
+    .stats .numbers{ display:flex; flex-direction:column; gap:2px }
+    .numbers b{ font-size:18px }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation: none !important; transition: none !important }
+    }
+
+    footer{ text-align:center; color:var(--muted); margin:40px 0 0; font-size:12px }
