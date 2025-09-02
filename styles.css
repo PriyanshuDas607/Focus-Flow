@@ -131,4 +131,30 @@
       *{ animation: none !important; transition: none !important }
     }
 
-    footer{ text-align:center; color:var(--muted); margin:40px 0 0; font-size:12px }
+    footer{ text-align:center; color:var(--muted); margin:40px 0 0; font-size:12px 
+    
+  .socials {
+  margin-top: 10px;
+  display : flex;
+  gap : 16px;
+  justify-content: center;
+}
+
+.socials a {
+  color: var(--muted);
+  transition: color var(--transition), transform var(--transition);
+  display: inline-flex;
+}
+
+.socials a:hover {
+  color: var(--text);
+  transform: scale(1.2);
+}
+
+.socials svg {
+  width: 22px;
+  height: 22px;
+}
+
+
+}
