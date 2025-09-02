@@ -1,4 +1,4 @@
-# Monochrome To-Do ✅
+# Focus Flow ✅
 
 A minimalistic **To-Do List Web App** built using **HTML, CSS, and JavaScript**.  
 The design follows a **black & white (monochrome)** theme for simplicity and focus.  
@@ -25,4 +25,5 @@ This website was **fully created with the help of an AI model**.
 ## 🚀 How to Run
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/monochrome-todo.git
+   git clone https://github.com/your-username/Focus-Flow-todo.git
+
