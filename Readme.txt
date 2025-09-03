@@ -25,5 +25,6 @@ This website was **fully created with the help of an AI model**.
 ## 🚀 How to Run
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/Focus-Flow-todo.git
+   git clone https://priyanshudas607.github.io/Focus-Flow/t
+
 
