@@ -38,6 +38,9 @@ function progress(){
   $('#donutArc').setAttribute('stroke-dasharray', `${pct} ${len-pct}`);
 }
 
+// --- Priority order map ---
+const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+
 // --- Rendering ---
 function render(){
   const board = $('#board');
@@ -57,7 +60,9 @@ function render(){
 
   $('#emptyState').classList.toggle('hidden', filtered.length!==0);
 
-  filtered.forEach(t => board.appendChild(taskCard(t)));
+  filtered
+    .sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority])
+    .forEach(t => board.appendChild(taskCard(t)));
 
   progress();
   save();
